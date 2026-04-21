@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Health Result</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.result-box{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+padding:40px;
+width:350px;
+border-radius:20px;
+text-align:center;
+color:white;
+box-shadow:0 20px 50px rgba(0,0,0,0.7);
+/* ❌ animation removed */
+}
+
+.result-box h1{
+margin-bottom:20px;
+}
+
+.status{
+font-size:20px;
+margin:20px 0;
+font-weight:bold;
+}
+
+.normal{
+color:#00ff9c;
+}
+
+.abnormal{
+color:#ff4d4d;
+}
+
+.btn{
+margin-top:20px;
+padding:12px 30px;
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+border:none;
+border-radius:30px;
+color:white;
+cursor:pointer;
+}
+
+.btn:hover{
+transform:scale(1.08);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="result-box">
+
+<h1>Health Status</h1>
+
+<div id="statusText" class="status"></div>
+
+<!-- ✅ FIXED BUTTON -->
+<button class="btn" onclick="goBack()">Check Again</button>
+
+</div>
+
+<script>
+
+let status = localStorage.getItem("status");
+
+let text = document.getElementById("statusText");
+
+if(status==="Normal"){
+text.innerHTML="✅ Your health is Normal";
+text.classList.add("normal");
+}else{
+text.innerHTML="⚠️ Your health is Abnormal";
+text.classList.add("abnormal");
+}
+
+/* ✅ GO TO DASHBOARD */
+function goBack(){
+window.location.href="dashboard.html";
+}
+
+</script>
+
+</body>
+</html>

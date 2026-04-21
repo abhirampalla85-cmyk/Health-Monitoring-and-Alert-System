@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+<div class="card">
+
+<h2>Login</h2>
+
+<div class="input-group">
+<input type="text" id="username" placeholder="Username">
+</div>
+
+<div class="input-group">
+<input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="input-group">
+<input type="password" id="password" placeholder="Password">
+</div>
+
+<button class="btn" onclick="login()">Login</button>
+
+<p>New user? <a href="signup.html">Register</a></p>
+
+</div>
+</div>
+
+<script>
+function login(){
+
+let e = document.getElementById("email").value.trim();
+let p = document.getElementById("password").value.trim();
+
+fetch("http://localhost:8080/api/auth/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+email:e,
+password:p
+})
+})
+.then(res=>res.json())   // ✅ FIXED (JSON)
+.then(data=>{
+
+if(data.status === "Success"){   // ✅ FIXED
+
+localStorage.setItem("userId", data.userId);
+localStorage.setItem("username", data.username);
+
+window.location.href="dashboard.html";
+
+}else{
+alert("Invalid login");
+}
+
+})
+.catch(()=>{
+alert("Server error");
+});
+
+}
+</script>
+</body>
+</html>
